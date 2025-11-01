@@ -1,0 +1,72 @@
+[
+  {
+    "id": "b1",
+    "title": "The Pragmatic Programmer",
+    "author": "Andrew Hunt",
+    "coverImage": "https://images-na.ssl-images-amazon.com/images/I/51W1sBPO7tL._SX380_BO1,204,203,200_.jpg",
+    "lastUpdated": "2023-10-01T12:00:00Z",
+    "status": "unread",
+    "notes": "",
+    "version": 1
+  },
+  {
+    "id": "b2",
+    "title": "Clean Code",
+    "author": "Robert C. Martin",
+    "coverImage": "https://m.media-amazon.com/images/I/41xShlnTZTL._SX376_BO1,204,203,200_.jpg",
+    "lastUpdated": "2023-09-10T09:30:00Z",
+    "status": "reading",
+    "notes": "Read chapters 1-3",
+    "version": 1
+  },
+  {
+    "id": "b3",
+    "title": "You Don't Know JS",
+    "author": "Kyle Simpson",
+    "coverImage": "https://github.com/getify/You-Dont-Know-JS/raw/2nd-ed/get-started/images/cover.png",
+    "lastUpdated": "2023-07-20T08:00:00Z",
+    "status": "done",
+    "notes": "Great deep dives",
+    "version": 1
+  },
+  {
+    "id": "b4",
+    "title": "Refactoring",
+    "author": "Martin Fowler",
+    "coverImage": "https://m.media-amazon.com/images/I/41LBzpPXCOL._SX379_BO1,204,203,200_.jpg",
+    "lastUpdated": "2023-08-15T10:45:00Z",
+    "status": "reading",
+    "notes": "Learning about code smells",
+    "version": 1
+  },
+  {
+    "id": "b7",
+    "title": "Domain-Driven Design",
+    "author": "Eric Evans",
+    "coverImage": "https://m.media-amazon.com/images/I/51sZW87slRL._SX375_BO1,204,203,200_.jpg",
+    "lastUpdated": "2023-04-22T16:30:00Z",
+    "status": "unread",
+    "notes": "",
+    "version": 1
+  },
+  {
+    "id": "b9",
+    "title": "Introduction to Algorithms",
+    "author": "Thomas H. Cormen",
+    "coverImage": "https://m.media-amazon.com/images/I/41T0iBxY8FL._SX440_BO1,204,203,200_.jpg",
+    "lastUpdated": "2023-02-18T13:40:00Z",
+    "status": "unread",
+    "notes": "",
+    "version": 1
+  },
+  {
+    "id": "b10",
+    "title": "Structure and Interpretation of Computer Programs",
+    "author": "Harold Abelson",
+    "coverImage": "https://m.media-amazon.com/images/I/51H17R%2BbW8L._SX377_BO1,204,203,200_.jpg",
+    "lastUpdated": "2023-01-30T08:25:00Z",
+    "status": "done",
+    "notes": "Mind-bending concepts",
+    "version": 1
+  }
+]
