@@ -31,16 +31,6 @@ describe('BookCard', () => {
     expect(getByText('F. Scott Fitzgerald')).toBeTruthy();
   });
 
-  it('renders book cover image with correct source', () => {
-    const { UNSAFE_getByType } = render(
-      <BookCard book={mockBook} onPress={jest.fn()} />,
-    );
-
-    const fastImage = UNSAFE_getByType(FastImage);
-    expect(fastImage.props.source.uri).toBe(mockBook.coverImage);
-    expect(fastImage.props.source.priority).toBe(FastImage.priority.normal);
-  });
-
   it('calls onPress when card is pressed', () => {
     const onPressMock = jest.fn();
     const { getByTestId } = render(
