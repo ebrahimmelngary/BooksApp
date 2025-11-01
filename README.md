@@ -1,5 +1,5 @@
 This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
-#DEMO
+# DEMO
 ![Simulator Screen Recording - iPhone 16 Plus - 2025-11-02 at 00 47 31](https://github.com/user-attachments/assets/49d81ec2-e54a-475f-a9e7-59217330eacd)
 
 
