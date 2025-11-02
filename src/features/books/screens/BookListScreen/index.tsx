@@ -56,6 +56,17 @@ export default function BookListScreen() {
     }
   };
 
+  const renderCards = ({ item }: { item: Book }) => (
+    <BookCard
+      book={item}
+      onPress={() =>
+        navigation.navigate('Details' as never, { id: item.id } as never)
+      }
+    />
+  );
+
+  const keyExtractor = (item: Book) => item.id;
+
   if (state.loading)
     return (
       <View style={styles.center}>
@@ -107,13 +118,8 @@ export default function BookListScreen() {
       ) : (
         <FlatList
           data={filtered}
-          keyExtractor={item => item.id}
-          renderItem={({ item }) => (
-            <BookCard
-              book={item}
-              onPress={() => navigation.navigate('Details', { id: item.id })}
-            />
-          )}
+          keyExtractor={keyExtractor}
+          renderItem={renderCards}
           refreshControl={
             <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
           }
