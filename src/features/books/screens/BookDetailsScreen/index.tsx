@@ -95,19 +95,21 @@ export default function BookDetailsScreen() {
         });
       }
     } catch (e) {
-      setSnack({
-        message: 'Save failed (exception)',
-        action: () => {
-          if (pendingRef.current?.prev) {
-            dispatch({
-              type: 'UPDATE_BOOK_OPTIMISTIC',
-              payload: pendingRef.current.prev!,
-            });
-            pendingRef.current = null;
-          }
-          setSnack(null);
-        },
-      });
+      if (e instanceof Error) {
+        setSnack({
+          message: 'Save failed (exception)',
+          action: () => {
+            if (pendingRef.current?.prev) {
+              dispatch({
+                type: 'UPDATE_BOOK_OPTIMISTIC',
+                payload: pendingRef.current.prev!,
+              });
+              pendingRef.current = null;
+            }
+            setSnack(null);
+          },
+        });
+      }
     }
   }, [book, local, dispatch]);
 
@@ -120,12 +122,12 @@ export default function BookDetailsScreen() {
 
   return (
     <View style={styles.container}>
-      <ScrollView contentContainerStyle={{ padding: 16 }}>
+      <ScrollView>
         <Text style={styles.title}>{book.title}</Text>
         <Text style={styles.author}>By {book.author}</Text>
-        <View style={{ marginTop: 12 }}>
-          <Text style={{ fontWeight: '700' }}>Status</Text>
-          <View style={{ flexDirection: 'row', marginTop: 8 }}>
+        <View style={styles.marginTop}>
+          <Text>Status</Text>
+          <View style={styles.rowContainer}>
             <Button
               title="Unread"
               onPress={() =>
@@ -135,7 +137,6 @@ export default function BookDetailsScreen() {
                 local.status === Options.unread ? AppColors.primary : undefined
               }
             />
-            <View style={{ width: 8 }} />
             <Button
               title="Reading"
               onPress={() =>
@@ -145,7 +146,6 @@ export default function BookDetailsScreen() {
                 local.status === Options.reading ? AppColors.primary : undefined
               }
             />
-            <View style={{ width: 8 }} />
             <Button
               title="Done"
               onPress={() =>
@@ -158,8 +158,8 @@ export default function BookDetailsScreen() {
           </View>
         </View>
 
-        <View style={{ marginTop: 16 }}>
-          <Text style={{ fontWeight: '700' }}>Notes</Text>
+        <View style={styles.marginTop}>
+          <Text>Notes</Text>
           <TextInput
             value={local.notes}
             onChangeText={t => setLocal(s => (s ? { ...s, notes: t } : s))}
@@ -168,7 +168,7 @@ export default function BookDetailsScreen() {
           />
         </View>
 
-        <View style={{ marginTop: 16 }}>
+        <View style={styles.marginTop}>
           <Button title="Save" onPress={saveOptimistic} />
         </View>
       </ScrollView>

@@ -8,5 +8,5 @@ export interface Book {
   status: Status;
   notes: string;
   version: number;
-  coverImage: string | null;
+  coverImage: string | null | undefined;
 }
