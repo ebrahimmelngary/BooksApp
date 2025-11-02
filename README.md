@@ -4,98 +4,211 @@ This is a new [**React Native**](https://reactnative.dev) project, bootstrapped 
 
 
 # Getting Started
+# BooksApp Project Structure
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+## Overview
+A React Native application for managing books with features for tracking reading status, syncing data, and organizing book collections.
 
-## Step 1: Start Metro
+---
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+## Directory Structure
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+### `/src`
+Root source directory containing all application code.
 
-```sh
-# Using npm
-npm start
+---
 
-# OR using Yarn
-yarn start
+### `/src/components`
+Reusable UI components used across the application.
+
+- **`__test__/`** - Unit tests for components
+- **`Snackbar.tsx`** - Toast notification component for user feedback
+
+---
+
+### `/src/constant`
+Application-wide constants and configuration values.
+
+- **`AppColors.ts`** - Color palette and theme definitions used throughout the app
+
+---
+
+### `/src/data`
+Static data and initial datasets.
+
+- **`books.json`** - Initial book data, seed data, or mock data for development/testing
+
+---
+
+### `/src/features/books`
+Main feature module for book management functionality.
+
+#### `/src/features/books/api`
+API integration layer for book-related operations.
+- Handles external API calls (e.g., Open Library API)
+- Manages data fetching and transformation
+
+#### `/src/features/books/components`
+Book-specific UI components.
+
+- **`__tests__/`** - Component unit tests
+- **`BookCard.tsx`** - Card component for displaying book information in lists
+
+#### `/src/features/books/screens`
+Screen-level components for book-related views.
+
+- **`__tests__/`** - Screen integration tests
+- **`BookDetailsScreen/`** - Detailed view of a single book
+  - Edit book information
+  - Update reading status
+  - Add/edit notes
+- **`BookListScreen/`** - List view of all books
+  - Display books with filters
+  - Search functionality
+  - Navigation to details
+
+#### `/src/features/books/types.ts`
+TypeScript type definitions for book-related data structures.
+
+```typescript
+// Example types:
+// - Book
+// - BookStatus ('read' | 'reading' | 'unread')
+// - BookFormData
 ```
 
-## Step 2: Build and run your app
+---
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
+### `/src/navigation`
+Navigation configuration and routing.
 
-### Android
+- **`RootNavigator.tsx`** - Main navigation container and route definitions
+- **`types.ts`** - TypeScript types for navigation props and route params
 
-```sh
-# Using npm
-npm run android
+---
 
-# OR using Yarn
-yarn android
+### `/src/state`
+Global state management using React Context API.
+
+- **`BooksContext.tsx`** - Context provider for books state
+  - Book CRUD operations
+  - State management hooks
+  - Global book data access
+
+---
+
+### `/src/sync`
+Data synchronization layer for remote storage.
+
+- **`sync.ts`** - Synchronization logic
+  - `saveBookRemote()` - Save book data to remote server
+  - Conflict resolution
+  - Offline/online sync management
+  - Version control for data consistency
+
+---
+
+### `/src/vendor`
+Third-party libraries, polyfills, or vendor-specific code.
+
+---
+
+## Key Architectural Patterns
+
+### Feature-Based Organization
+The app uses a feature-based structure under `/src/features/`, where each feature (like `books`) contains its own:
+- API layer
+- Components
+- Screens
+- Type definitions
+
+This promotes:
+- **Modularity** - Features are self-contained
+- **Scalability** - Easy to add new features
+- **Maintainability** - Related code is co-located
+
+### State Management
+- **Global State**: Managed via React Context (`BooksContext`)
+- **Local State**: Component-level state using React hooks
+
+### Data Flow
+```
+User Interface (Screens/Components)
+         ↓
+    BooksContext (State)
+         ↓
+    Sync Layer (sync.ts)
+         ↓
+    API Layer (features/books/api)
+         ↓
+    Remote Server / Local Storage
 ```
 
-### iOS
+---
 
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
+## Testing Strategy
 
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
+### Unit Tests
+- **Components**: `/src/components/__test__/`
+- **Book Components**: `/src/features/books/components/__tests__/`
 
-```sh
-bundle install
-```
+### Integration Tests
+- **Screens**: `/src/features/books/screens/__tests__/`
+- Test user interactions and data flow
 
-Then, and every time you update your native dependencies, run:
+### Test Setup
+- Uses Jest with React Native Testing Library
+- Mocks for external dependencies (sync, API calls)
+- Wrapper components for context providers
 
-```sh
-bundle exec pod install
-```
+---
 
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
+## Getting Started
 
-```sh
-# Using npm
-npm run ios
+### Development Workflow
+1. **Components**: Create reusable UI in `/src/components/`
+2. **Features**: Build feature-specific logic in `/src/features/`
+3. **State**: Manage data in `/src/state/BooksContext.tsx`
+4. **Sync**: Handle remote operations in `/src/sync/sync.ts`
+5. **Navigation**: Configure routes in `/src/navigation/`
 
-# OR using Yarn
-yarn ios
-```
+### Adding a New Feature
+1. Create folder: `/src/features/[feature-name]/`
+2. Add subdirectories: `api/`, `components/`, `screens/`
+3. Define types in `types.ts`
+4. Create context if needed in `/src/state/`
+5. Register routes in `/src/navigation/RootNavigator.tsx`
 
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
+---
 
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
+## Dependencies
+- **React Native** - Mobile framework
+- **React Navigation** - Routing and navigation
+- **Jest** - Testing framework
+- **React Native Testing Library** - Component testing utilities
 
-## Step 3: Modify your app
+---
 
-Now that you have successfully run the app, let's make changes!
+## Best Practices
 
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
+### File Naming
+- **Components**: PascalCase (e.g., `BookCard.tsx`)
+- **Utilities**: camelCase (e.g., `sync.ts`)
+- **Tests**: Match component name with `.test.tsx` suffix
 
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
+### Type Safety
+- Define all types in `types.ts` files
+- Use TypeScript for all new code
+- Avoid `any` types
 
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
+### Testing
+- Write tests alongside components
+- Mock external dependencies
+- Use descriptive test names
+- Aim for high coverage of critical paths
 
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
-# BooksApp
+### Code Organization
+- Keep components small and focused
+- Extract reusable logic into hooks
+- Co-locate related code
+- Separate concerns (UI, logic, state, API)
