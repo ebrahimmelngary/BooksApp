@@ -18,7 +18,6 @@ export const BookCard: React.FC<Props> = React.memo(({ book, onPress }) => (
     <FastImage
       source={{
         uri: book?.coverImage as string,
-        priority: FastImage.priority.normal,
       }}
       style={styles.image}
     />

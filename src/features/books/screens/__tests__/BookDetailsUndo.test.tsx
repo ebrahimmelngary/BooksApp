@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from '@testing-library/react-native';
-import BookDetailsScreen from '../screens/BookDetailsScreen';
-import { BooksProvider } from '../../../state/BooksContext';
+import { BooksProvider } from '../../../../state/BooksContext';
+import BookDetailsScreen from '../BookDetailsScreen';
 
 jest.mock('../../../sync/sync', () => {
   const actual = jest.requireActual('../../../sync/sync');
